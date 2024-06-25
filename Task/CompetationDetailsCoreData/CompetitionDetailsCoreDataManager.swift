@@ -6,3 +6,6 @@
 //
 
 import Foundation
+extension CoreDataManager {
+    
+}

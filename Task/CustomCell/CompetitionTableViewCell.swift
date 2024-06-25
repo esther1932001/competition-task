@@ -33,7 +33,7 @@ class CompetitionTableViewCell: UITableViewCell {
         shortNameLabel.text = competition.emblem
         numberOfTeams.text = "code: \(competition.code ?? "")"
         if let currentGames = competition.type {
-            numberOfGames.text = "Games: \(currentGames)"
+            numberOfGames.text = "type: \(currentGames)"
         } else {
             numberOfGames.text = "Games: N/A"
         }
