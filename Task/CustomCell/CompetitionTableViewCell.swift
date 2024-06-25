@@ -30,9 +30,9 @@ class CompetitionTableViewCell: UITableViewCell {
     func configure(with competition: CompetationDetails) {
         print("Configuring with competition: \(competition)")
         longNameLabel.text = competition.name
-        shortNameLabel.text = competition.area?.name
-        numberOfTeams.text = "Teams: \(competition.currentSeason?.currentMatchday ?? 0)"
-        if let currentGames = competition.currentSeason?.currentMatchday {
+        shortNameLabel.text = competition.emblem
+        numberOfTeams.text = "code: \(competition.code ?? "")"
+        if let currentGames = competition.type {
             numberOfGames.text = "Games: \(currentGames)"
         } else {
             numberOfGames.text = "Games: N/A"
