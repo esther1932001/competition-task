@@ -12,15 +12,15 @@ class CompetitionTableViewCell: UITableViewCell {
     // MARK: OutLets
     @IBOutlet weak var longNameLabel: UILabel!
     @IBOutlet weak var shortNameLabel: UILabel!
-    @IBOutlet weak var numberOfTeams: UILabel!
-    @IBOutlet weak var numberOfGames: UILabel!
+    @IBOutlet weak var code: UILabel!
+    @IBOutlet weak var type: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLabel(longNameLabel)
         setupLabel(shortNameLabel)
-        setupLabel(numberOfTeams)
-        setupLabel(numberOfGames)
+        setupLabel(code)
+        setupLabel(type)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -31,11 +31,11 @@ class CompetitionTableViewCell: UITableViewCell {
         print("Configuring with competition: \(competition)")
         longNameLabel.text = competition.name
         shortNameLabel.text = competition.emblem
-        numberOfTeams.text = "code: \(competition.code ?? "")"
-        if let currentGames = competition.type {
-            numberOfGames.text = "type: \(currentGames)"
+        code.text = "code: \(competition.code ?? "")"
+        if let typeValue = competition.type {
+            type.text = "type: \(typeValue)"
         } else {
-            numberOfGames.text = "Games: N/A"
+            type.text = "Games: N/A"
         }
     }
 

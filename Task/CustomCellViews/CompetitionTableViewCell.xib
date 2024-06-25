@@ -77,10 +77,10 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="code" destination="gmH-ht-yrd" id="HQa-qa-fEj"/>
                 <outlet property="longNameLabel" destination="zaS-rw-cN2" id="0Ds-Sn-IF3"/>
-                <outlet property="numberOfGames" destination="EtZ-Bh-2QW" id="wxb-oQ-o1H"/>
-                <outlet property="numberOfTeams" destination="gmH-ht-yrd" id="HQa-qa-fEj"/>
                 <outlet property="shortNameLabel" destination="Y2a-4H-Myo" id="Drv-5r-KEp"/>
+                <outlet property="type" destination="EtZ-Bh-2QW" id="wxb-oQ-o1H"/>
             </connections>
             <point key="canvasLocation" x="91" y="39"/>
         </tableViewCell>
