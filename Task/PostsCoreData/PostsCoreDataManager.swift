@@ -15,11 +15,6 @@ class CoreDataManager {
 
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Task")
-//        let description = NSPersistentStoreDescription()
-//        description.shouldMigrateStoreAutomatically = true
-//        description.shouldInferMappingModelAutomatically = true
-//        container.persistentStoreDescriptions = [description]
-        
         container.loadPersistentStores { storeDescription, error in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
@@ -36,12 +31,11 @@ class CoreDataManager {
     func saveCompetitions(competitions: [CompetationDetails]) {
         let context = self.context()
         
-//        clearCompetitions()
+        // clearCompetitions()
         
         for competition in competitions {
             print("Saving competition: \(competition)")
             
-//            let competitionCD = CompetationDetailsCD(context: context)
             let competitionCD: CompetationDetailsCD! = NSEntityDescription.insertNewObject(forEntityName: "CompetationDetailsCD", into: context) as? CompetationDetailsCD
             competitionCD.id = Int32(competition.id ?? 0)
             competitionCD.name = competition.name
@@ -50,24 +44,27 @@ class CoreDataManager {
             competitionCD.emblem = competition.emblem
             competitionCD.lastUpdated = competition.lastUpdated
             
-            // Set relationships
+            // Set relationships using NSSet accessor methods
             if let area = competition.area {
-                let areaCD = AreaCD(context: context)
+                let areaCD = NSEntityDescription.insertNewObject(forEntityName: "AreaCD", into: context) as! AreaCD
                 areaCD.id = Int32(area.id ?? 0)
                 areaCD.name = area.name
                 areaCD.code = area.code
                 areaCD.flag = area.flag
-                competitionCD.area = areaCD
+                //competitionCD.addToArea(areaCD)
+                
                 print("Saving area: \(area)")
             }
             
             if let currentSeason = competition.currentSeason {
-                let seasonCD = SeasonCD(context: context)
+                let seasonCD = NSEntityDescription.insertNewObject(forEntityName: "SeasonCD", into: context) as! SeasonCD
                 seasonCD.id = Int32(currentSeason.id ?? 0)
                 seasonCD.startDate = currentSeason.startDate
                 seasonCD.endDate = currentSeason.endDate
                 seasonCD.currentMatchday = Int32(currentSeason.currentMatchday ?? 0)
+               // competitionCD.addToCurrentSeason(seasonCD)
                 competitionCD.currentSeason = seasonCD
+                
                 print("Saving current season: \(currentSeason)")
             }
         }
@@ -129,7 +126,7 @@ class CoreDataManager {
         
         clearCompetitionDetails(competitionId: details.id ?? 0)
         
-        let competitionCD = CompetationDetailsCD(context: context)
+        let competitionCD : CompetationDetailsCD! = NSEntityDescription.insertNewObject(forEntityName: "CompetationDetailsCD", into: context) as? CompetationDetailsCD
         competitionCD.id = Int32(details.id ?? 0)
         competitionCD.name = details.name
         competitionCD.code = details.code
@@ -221,10 +218,11 @@ class CoreDataManager {
 
     
     // MARK: - Fetch Saved Teams
-    func fetchSavedTeams(competitionId: Int) -> [Team] {
+    func fetchSavedTeams(competitionId: Int) -> [Team]? {
         let context = self.context()
         let fetchRequest: NSFetchRequest<TeamCD> = TeamCD.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "competitionId == %d", Int32(competitionId))
+
         
         do {
             let fetchedTeams = try context.fetch(fetchRequest)

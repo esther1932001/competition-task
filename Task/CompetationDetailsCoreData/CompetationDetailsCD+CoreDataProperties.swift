@@ -23,38 +23,36 @@ extension CompetationDetailsCD {
     // Relationships
     @NSManaged public var area: AreaCD?
     @NSManaged public var currentSeason: SeasonCD?
-    @NSManaged public var teams: NSSet?      // Assume this relationship exists
-    @NSManaged public var matches: NSSet?    // Assume this relationship exists
 }
 
-// MARK: Generated accessors for teams
+// MARK: Generated accessors for area
 extension CompetationDetailsCD {
 
-    @objc(addTeamsObject:)
-    @NSManaged public func addToTeams(_ value: TeamCD)
+    @objc(addAreaObject:)
+    @NSManaged public func addToArea(_ value: AreaCD)
 
-    @objc(removeTeamsObject:)
-    @NSManaged public func removeFromTeams(_ value: TeamCD)
+    @objc(removeAreaObject:)
+    @NSManaged public func removeFromArea(_ value: AreaCD)
 
-    @objc(addTeams:)
-    @NSManaged public func addToTeams(_ values: NSSet)
+    @objc(addArea:)
+    @NSManaged public func addToArea(_ values: NSSet)
 
-    @objc(removeTeams:)
-    @NSManaged public func removeFromTeams(_ values: NSSet)
+    @objc(removeArea:)
+    @NSManaged public func removeFromArea(_ values: NSSet)
 }
 
-// MARK: Generated accessors for matches
+// MARK: Generated accessors for currentSeason
 extension CompetationDetailsCD {
 
-    @objc(addMatchesObject:)
-    @NSManaged public func addToSeasons(_ value: SeasonCD)
+    @objc(addCurrentSeasonObject:)
+    @NSManaged public func addToCurrentSeason(_ value: SeasonCD)
 
-    @objc(removeMatchesObject:)
-    @NSManaged public func removeFromSeasons(_ value: SeasonCD)
+    @objc(removeCurrentSeasonObject:)
+    @NSManaged public func removeFromCurrentSeason(_ value: SeasonCD)
 
-    @objc(addMatches:)
-    @NSManaged public func addToSeasons(_ values: NSSet)
+    @objc(addCurrentSeason:)
+    @NSManaged public func addToCurrentSeason(_ values: NSSet)
 
-    @objc(removeMatches:)
-    @NSManaged public func removeFromSeasons(_ values: NSSet)
+    @objc(removeCurrentSeason:)
+    @NSManaged public func removeFromCurrentSeason(_ values: NSSet)
 }

@@ -64,7 +64,7 @@ class DetailsViewController: UIViewController {
         let queue = DispatchQueue(label: "NetworkMonitor")
         pathMonitor.pathUpdateHandler = { [weak self] path in
             print("Network status changed: \(path.status)")
-            self?.isNetworkConnected = path.status == .satisfied
+            //self?.isNetworkConnected = path.status == .satisfied
             
             DispatchQueue.main.async {
                 self?.loadDetailsData()
@@ -119,38 +119,89 @@ class DetailsViewController: UIViewController {
         }
     }
     
-    func loadTeamDetails() {
-        guard let teamId = teamId else {
-            print("Team ID is nil")
-            return
-        }
-        activityIndicator.startAnimating()
-        
-        let urlString = "competitions/\(teamId)/teams"
-        print("Fetching URL: \(urlString)")
-        
-        NetworkManager.shared.request(urlString, type: Posts.self) { [weak self] result in
-            DispatchQueue.main.async {
-                self?.activityIndicator.stopAnimating()
-                
-                switch result {
-                case .success(let posts):
-                    guard let team = posts.teams?.first else {
-                        return
+        func loadTeamDetails() {
+            guard let teamId = teamId else {
+                print("Team ID is nil")
+                return
+            }
+            activityIndicator.startAnimating()
+    
+            let urlString = "competitions/\(teamId)/teams"
+            print("Fetching URL: \(urlString)")
+    
+            NetworkManager.shared.request(urlString, type: Posts.self) { [weak self] result in
+                DispatchQueue.main.async {
+                    self?.activityIndicator.stopAnimating()
+    
+                    switch result {
+                    case .success(let posts):
+                        guard let team = posts.teams?.first else {
+                            return
+                        }
+                        self?.teams = posts.teams ?? []
+                        self?.team = team
+                        self?.collectionView.reloadData()
+    
+                    case .failure(let error):
+                        print("Error fetching team details: \(error.localizedDescription)")
+                        self?.showErrorAlert(message: "Error fetching team details: \(error.localizedDescription)")
                     }
-                    self?.teams = posts.teams ?? []
-                    self?.team = team
-                    self?.collectionView.reloadData()
-                    
-                case .failure(let error):
-                    print("Error fetching team details: \(error.localizedDescription)")
-                    self?.showErrorAlert(message: "Error fetching team details: \(error.localizedDescription)")
                 }
             }
         }
-    }
+//    private func loadTeamDetails() {
+//        guard let teamId = teamId else {
+//            print("Team ID is nil")
+//            return
+//        }
+//
+//        activityIndicator.startAnimating()
+//
+//        if isNetworkConnected {
+//            let urlString = "competitions/\(teamId)/teams"
+//            print("Fetching URLlllll: \(urlString)")
+//
+//            NetworkManager.shared.request(urlString, type: Posts.self) { [weak self] result in
+//                DispatchQueue.main.async {
+//                    self?.activityIndicator.stopAnimating()
+//
+//                    switch result {
+//                    case .success(let posts):
+//                        if let teams = posts.teams {
+//                            self?.teams = teams
+//                            self?.team = teams.first
+//
+//                            // Save teams to Core Data
+//                            CoreDataManager.shared.saveTeams(teams: teams, competitionId: teamId)
+//
+//                            self?.collectionView.reloadData()
+//                        } else {
+//                            print("No teams found in the fetched posts")
+//                            self?.showErrorAlert(message: "No teams found")
+//                        }
+//
+//                    case .failure(let error):
+//                        print("Error fetching team details: \(error.localizedDescription)")
+//                        self?.showErrorAlert(message: "Error fetching team details: \(error.localizedDescription)")
+//                    }
+//                }
+//            }
+//        } else {
+//            activityIndicator.stopAnimating()
+//            // Fetch saved teams from Core Data
+//            if let savedTeams = CoreDataManager.shared.fetchSavedTeams(competitionId: teamId) {
+//                print("Fetched saved teams: \(savedTeams)")
+//                teams = savedTeams
+//                team = savedTeams.first
+//                collectionView.reloadData()
+//            } else {
+//                print("No saved teams found")
+//                showErrorAlert(message: "No saved teams found")
+//            }
+//        }
+//
+//    }
 }
-
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegateFlowLayout
 extension DetailsViewController: UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
