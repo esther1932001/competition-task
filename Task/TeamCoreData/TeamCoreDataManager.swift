@@ -13,7 +13,7 @@ extension CoreDataManager {
      func saveTeams(teams: [Team], competitionId: Int) {
          let context = self.context()
          
-         clearTeams(competitionId: competitionId)
+       //  clearTeams(competitionId: competitionId)
          
          for team in teams {
              let teamCD = TeamCD(context: context)

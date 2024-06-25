@@ -47,6 +47,7 @@ struct Team: Codable {
     var coach: Coach?
     var squad: [Squad]?
     var lastUpdated: Date?
+   // var competitionId: Int? 
 }
 
 // MARK: - Area

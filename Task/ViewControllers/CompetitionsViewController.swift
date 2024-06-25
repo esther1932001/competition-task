@@ -33,7 +33,6 @@ class CompetitionsViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
         CoreDataManager.shared.fetchSavedCompetitions()
     }
 
@@ -43,9 +42,6 @@ class CompetitionsViewController: UIViewController {
         let queue = DispatchQueue(label: "NetworkMonitor")
         pathMonitor.pathUpdateHandler = { [weak self] path in
             print("Network status changed: \(path.status)")
-//            self?.isNetworkConnected = path.status == .satisfied
-            
-            // Reload competitions data whenever network status changes
             DispatchQueue.main.async {
                 self?.loadAllCompetitions()
             }
@@ -87,8 +83,6 @@ class CompetitionsViewController: UIViewController {
             }
         } else {
             self.activityIndicator.stopAnimating()
-           // self.showErrorAlert(message: "No network connection. Loading saved competitions.")
-            // Load competitions from Core Data
             self.competitions = CoreDataManager.shared.fetchSavedCompetitions()
             print("Saved Data: \( self.competitions)")
             self.tableView.reloadData()

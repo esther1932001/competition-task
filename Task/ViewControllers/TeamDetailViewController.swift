@@ -15,7 +15,7 @@ class TeamDetailViewController: UIViewController {
     @IBOutlet weak var teamWebsiteLabel: UILabel!
     @IBOutlet weak var teamTlaLabel: UILabel!
     @IBOutlet weak var TitleOfTeamPlayersLabel: UILabel!
-    @IBOutlet weak var playersTableView: UITableView! // New UITableView outlet
+    @IBOutlet weak var playersTableView: UITableView! 
     
     // MARK: Variable
     var team: Team?
