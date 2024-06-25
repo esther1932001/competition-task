@@ -19,7 +19,7 @@ class CompetitionsViewController: UIViewController {
     var competitions: [CompetationDetails] = []
     var activityIndicator: UIActivityIndicatorView!
     private var pathMonitor: NWPathMonitor!
-    private var isNetworkConnected = false
+    private var isNetworkConnected = true
 
     override func viewDidLoad() {
         super.viewDidLoad()

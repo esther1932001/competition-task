@@ -45,6 +45,7 @@
 		5EC910F12C28B4A0004C272C /* CoachCD+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC910F02C28B4A0004C272C /* CoachCD+CoreDataProperties.swift */; };
 		5EC910F32C28B4D3004C272C /* CoachCD+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC910F22C28B4D3004C272C /* CoachCD+CoreDataClass.swift */; };
 		5EF317A82C29211200C42B60 /* TeamCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF317A72C29211200C42B60 /* TeamCoreDataManager.swift */; };
+		5EF317AA2C2B3C7E00C42B60 /* CompetitionDetailsDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF317A92C2B3C7E00C42B60 /* CompetitionDetailsDataManager.swift */; };
 		BDCF31C25455A27CEBE26885 /* Pods_Task.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA0CD50C8A0BD5DE04E8427A /* Pods_Task.framework */; };
 /* End PBXBuildFile section */
 
@@ -90,6 +91,7 @@
 		5EC910F02C28B4A0004C272C /* CoachCD+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoachCD+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5EC910F22C28B4D3004C272C /* CoachCD+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoachCD+CoreDataClass.swift"; sourceTree = "<group>"; };
 		5EF317A72C29211200C42B60 /* TeamCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCoreDataManager.swift; sourceTree = "<group>"; };
+		5EF317A92C2B3C7E00C42B60 /* CompetitionDetailsDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompetitionDetailsDataManager.swift; sourceTree = "<group>"; };
 		D58BA98E4CF795CE1894E9C2 /* Pods-Task.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Task.release.xcconfig"; path = "Target Support Files/Pods-Task/Pods-Task.release.xcconfig"; sourceTree = "<group>"; };
 		DA0CD50C8A0BD5DE04E8427A /* Pods_Task.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Task.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -275,6 +277,7 @@
 			children = (
 				5EC910C92C28ADB5004C272C /* CompetationDetailsCD+CoreDataProperties.swift */,
 				5EC910D92C28B06C004C272C /* CompetationDetailsCD+CoreDataClass.swift */,
+				5EF317A92C2B3C7E00C42B60 /* CompetitionDetailsDataManager.swift */,
 			);
 			path = CompetationDetailsCoreData;
 			sourceTree = "<group>";
@@ -456,6 +459,7 @@
 				5EC910D42C28AF94004C272C /* FiltersCD+CoreDataClass.swift in Sources */,
 				5EC910F32C28B4D3004C272C /* CoachCD+CoreDataClass.swift in Sources */,
 				5EC910D02C28AECF004C272C /* CompetitionCD+CoreDataProperties.swift in Sources */,
+				5EF317AA2C2B3C7E00C42B60 /* CompetitionDetailsDataManager.swift in Sources */,
 				5EC910EC2C28B40A004C272C /* AreaCD+CoreDataProperties.swift in Sources */,
 				5E2445012C161128002DAB58 /* CompetitionsViewController.swift in Sources */,
 				5EC910DF2C28B195004C272C /* WinnerCD+CoreDataClass.swift in Sources */,

@@ -43,30 +43,31 @@ class CoreDataManager {
             competitionCD.type = competition.type
             competitionCD.emblem = competition.emblem
             competitionCD.lastUpdated = competition.lastUpdated
+    
+//            if let area = competition.area {
+//                let areaCD = NSEntityDescription.insertNewObject(forEntityName: "AreaCD", into: context) as! AreaCD
+//                let areaCD = AreaCD(context: context)
+//                areaCD.id = Int32(area.id ?? 0)
+//                areaCD.name = area.name
+//                areaCD.code = area.code
+//                areaCD.flag = area.flag
+//                competitionCD.addToArea(areaCD)
+//                competitionCD.addToArea(areaCD)
+//                print("Saving area: \(area)")
+//            }
             
-            // Set relationships using NSSet accessor methods
-            if let area = competition.area {
-                let areaCD = NSEntityDescription.insertNewObject(forEntityName: "AreaCD", into: context) as! AreaCD
-                areaCD.id = Int32(area.id ?? 0)
-                areaCD.name = area.name
-                areaCD.code = area.code
-                areaCD.flag = area.flag
-                //competitionCD.addToArea(areaCD)
+//            if let currentSeason = competition.currentSeason {
+//                let seasonCD = NSEntityDescription.insertNewObject(forEntityName: "SeasonCD", into: context) as! SeasonCD
+//                let seasonCD = SeasonCD(context: context)
+//                seasonCD.id = Int32(currentSeason.id ?? 0)
+//                seasonCD.startDate = currentSeason.startDate
+//                seasonCD.endDate = currentSeason.endDate
+//                seasonCD.currentMatchday = Int32(currentSeason.currentMatchday ?? 0)
+//                competitionCD.addToCurrentSeason(seasonCD)
+                //competitionCD.currentSeason = seasonCD
                 
-                print("Saving area: \(area)")
-            }
-            
-            if let currentSeason = competition.currentSeason {
-                let seasonCD = NSEntityDescription.insertNewObject(forEntityName: "SeasonCD", into: context) as! SeasonCD
-                seasonCD.id = Int32(currentSeason.id ?? 0)
-                seasonCD.startDate = currentSeason.startDate
-                seasonCD.endDate = currentSeason.endDate
-                seasonCD.currentMatchday = Int32(currentSeason.currentMatchday ?? 0)
-               // competitionCD.addToCurrentSeason(seasonCD)
-                competitionCD.currentSeason = seasonCD
-                
-                print("Saving current season: \(currentSeason)")
-            }
+//                print("Saving current season: \(currentSeason)")
+//            }
         }
         
         do {
