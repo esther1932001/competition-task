@@ -15,10 +15,10 @@ class CoreDataManager {
 
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Task")
-//        let description = NSPersistentStoreDescription()
-//        description.shouldMigrateStoreAutomatically = true
-//        description.shouldInferMappingModelAutomatically = true
-//        container.persistentStoreDescriptions = [description]
+        let description = NSPersistentStoreDescription()
+        description.shouldMigrateStoreAutomatically = true
+        description.shouldInferMappingModelAutomatically = true
+        container.persistentStoreDescriptions = [description]
         
         container.loadPersistentStores { storeDescription, error in
             if let error = error as NSError? {
@@ -36,13 +36,12 @@ class CoreDataManager {
     func saveCompetitions(competitions: [CompetationDetails]) {
         let context = self.context()
         
-//        clearCompetitions()
+        clearCompetitions()
         
         for competition in competitions {
             print("Saving competition: \(competition)")
             
-            
-            let competitionCD: CompetationDetailsCD! = NSEntityDescription.insertNewObject(forEntityName: "CompetationDetailsCD", into: context) as? CompetationDetailsCD
+            let competitionCD = CompetationDetailsCD(context: context)
             competitionCD.id = Int32(competition.id ?? 0)
             competitionCD.name = competition.name
             competitionCD.code = competition.code
@@ -51,25 +50,25 @@ class CoreDataManager {
             competitionCD.lastUpdated = competition.lastUpdated
             
             // Set relationships
-//            if let area = competition.area {
-//                let areaCD = AreaCD(context: context)
-//                areaCD.id = Int32(area.id ?? 0)
-//                areaCD.name = area.name
-//                areaCD.code = area.code
-//                areaCD.flag = area.flag
-//                competitionCD.area = areaCD
-//                print("Saving area: \(area)")
-//            }
-//
-//            if let currentSeason = competition.currentSeason {
-//                let seasonCD = SeasonCD(context: context)
-//                seasonCD.id = Int32(currentSeason.id ?? 0)
-//                seasonCD.startDate = currentSeason.startDate
-//                seasonCD.endDate = currentSeason.endDate
-//                seasonCD.currentMatchday = Int32(currentSeason.currentMatchday ?? 0)
-//                competitionCD.currentSeason = seasonCD
-//                print("Saving current season: \(currentSeason)")
-//            }
+            if let area = competition.area {
+                let areaCD = AreaCD(context: context)
+                areaCD.id = Int32(area.id ?? 0)
+                areaCD.name = area.name
+                areaCD.code = area.code
+                areaCD.flag = area.flag
+                competitionCD.area = areaCD
+                print("Saving area: \(area)")
+            }
+            
+            if let currentSeason = competition.currentSeason {
+                let seasonCD = SeasonCD(context: context)
+                seasonCD.id = Int32(currentSeason.id ?? 0)
+                seasonCD.startDate = currentSeason.startDate
+                seasonCD.endDate = currentSeason.endDate
+                seasonCD.currentMatchday = Int32(currentSeason.currentMatchday ?? 0)
+                competitionCD.currentSeason = seasonCD
+                print("Saving current season: \(currentSeason)")
+            }
         }
         
         do {
@@ -94,43 +93,32 @@ class CoreDataManager {
     }
     
     // MARK: - Fetch Saved Competitions
-    func fetchSavedCompetitions() -> [CompetationDetailsCD]? {
-//        let context = self.context()
-//        let fetchRequest: NSFetchRequest<CompetationDetailsCD> = CompetationDetailsCD.fetchRequest()
-//
-//        do {
-//            let fetchedCompetitions = try context.fetch(fetchRequest)
-//            fetchedCompetitions.forEach { print("Fetched competitionCD: \($0)") }
-//
-//            let competitions = fetchedCompetitions.map { competitionCD in
-//                CompetationDetails(
-//                    area: competitionCD.area.flatMap { Area(id: Int($0.id), name: $0.name, code: $0.code, flag: $0.flag) },
-//                    id: Int(competitionCD.id),
-//                    name: competitionCD.name,
-//                    code: competitionCD.code,
-//                    type: competitionCD.type,
-//                    emblem: competitionCD.emblem,
-//                    currentSeason: competitionCD.currentSeason.flatMap { Season(id: Int($0.id), startDate: $0.startDate, endDate: $0.endDate, currentMatchday: Int($0.currentMatchday), winner: nil) },
-//                    lastUpdated: competitionCD.lastUpdated
-//                )
-//            }
-//
-//            competitions.forEach { print("Mapped competition: \($0)") }
-//            return competitions
-//        } catch {
-//            print("Failed to fetch competitions from Core Data: \(error.localizedDescription)")
-//            return []
-//        }
+    func fetchSavedCompetitions() -> [CompetationDetails] {
+        let context = self.context()
+        let fetchRequest: NSFetchRequest<CompetationDetailsCD> = CompetationDetailsCD.fetchRequest()
         
         do {
-            if let competationDetailsCD =  try context().fetch(CompetationDetailsCD.fetchRequest()) as? [CompetationDetailsCD] {
-                print(competationDetailsCD)
-                return competationDetailsCD
+            let fetchedCompetitions = try context.fetch(fetchRequest)
+            fetchedCompetitions.forEach { print("Fetched competitionCD: \($0)") }
+            
+            let competitions = fetchedCompetitions.map { competitionCD in
+                CompetationDetails(
+                    area: competitionCD.area.flatMap { Area(id: Int($0.id), name: $0.name, code: $0.code, flag: $0.flag) },
+                    id: Int(competitionCD.id),
+                    name: competitionCD.name,
+                    code: competitionCD.code,
+                    type: competitionCD.type,
+                    emblem: competitionCD.emblem,
+                    currentSeason: competitionCD.currentSeason.flatMap { Season(id: Int($0.id), startDate: $0.startDate, endDate: $0.endDate, currentMatchday: Int($0.currentMatchday), winner: nil) },
+                    lastUpdated: competitionCD.lastUpdated
+                )
             }
-        }
-        catch let error {
-            print(error)
-            return nil
+            
+            competitions.forEach { print("Mapped competition: \($0)") }
+            return competitions
+        } catch {
+            print("Failed to fetch competitions from Core Data: \(error.localizedDescription)")
+            return []
         }
     }
 

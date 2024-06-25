@@ -23,14 +23,13 @@ class CompetitionsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setupTitleLabel(titleLabel)
-//        titleLabel.text = "Competitions"
-//        setupActivityIndicator()
-//        setupTableView()
-//        startMonitoringNetwork()
-//        loadAllCompetitions()
+        setupTitleLabel(titleLabel)
+        titleLabel.text = "Competitions"
+        setupActivityIndicator()
+        setupTableView()
+        startMonitoringNetwork()
+        loadAllCompetitions()
        
-        CoreDataManager.shared.fetchSavedCompetitions()
     }
 
     // MARK: Start Monitoring Network
@@ -85,7 +84,7 @@ class CompetitionsViewController: UIViewController {
             self.activityIndicator.stopAnimating()
            // self.showErrorAlert(message: "No network connection. Loading saved competitions.")
             // Load competitions from Core Data
-//            self.competitions = CoreDataManager.shared.fetchSavedCompetitions()
+            self.competitions = CoreDataManager.shared.fetchSavedCompetitions()
             print("Saved Data: \( self.competitions)")
             self.tableView.reloadData()
         }
