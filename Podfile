@@ -7,6 +7,10 @@ target 'Task' do
 
   # Pods for Task
   pod 'SwiftSVG', '~> 2.0'
+  pod 'RxSwift', '6.7.1'
+  pod 'RxCocoa', '6.7.1'
 
+  # Specify the iOS platform version explicitly
+  platform :ios, '9.0'
 
 end

@@ -1,4 +1,89 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22F82" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="AreaCD" representedClassName=".AreaCD" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String"/>
+        <attribute name="flag" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CoachCD" representedClassName=".CoachCD" syncable="YES">
+        <attribute name="dateOfBirth" optional="YES" attributeType="String"/>
+        <attribute name="firstName" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="nationality" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="CompetationDetailsCD" representedClassName=".CompetationDetailsCD" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String"/>
+        <attribute name="emblem" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AreaCD"/>
+        <relationship name="currentSeason" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SeasonCD"/>
+    </entity>
+    <entity name="CompetitionCD" representedClassName=".CompetitionCD" syncable="YES">
+        <attribute name="code" optional="YES" attributeType="String"/>
+        <attribute name="emblem" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="FiltersCD" representedClassName=".FiltersCD" syncable="YES">
+        <attribute name="season" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="PostsCD" representedClassName=".PostsCD" syncable="YES">
+        <attribute name="count" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="competition" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CompetitionCD"/>
+        <relationship name="competitions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CompetationDetailsCD"/>
+        <relationship name="filters" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FiltersCD"/>
+        <relationship name="season" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SeasonCD"/>
+        <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamCD"/>
+    </entity>
+    <entity name="SeasonCD" representedClassName=".SeasonCD" syncable="YES">
+        <attribute name="currentMatchday" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="endDate" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="String"/>
+        <relationship name="winner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WinnerCD"/>
+    </entity>
+    <entity name="SquadCD" representedClassName=".SquadCD" syncable="YES">
+        <attribute name="dateOfBirth" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="nationality" optional="YES" attributeType="String"/>
+        <attribute name="position" optional="YES" attributeType="String"/>
+    </entity>
+    <entity name="TeamCD" representedClassName=".TeamCD" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="clubColors" optional="YES" attributeType="String"/>
+        <attribute name="crest" optional="YES" attributeType="String"/>
+        <attribute name="founded" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="shortName" optional="YES" attributeType="String"/>
+        <attribute name="tla" optional="YES" attributeType="String"/>
+        <attribute name="venue" optional="YES" attributeType="String"/>
+        <attribute name="website" optional="YES" attributeType="String"/>
+        <relationship name="area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AreaCD"/>
+        <relationship name="coach" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoachCD"/>
+        <relationship name="runningCompetitions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CompetationDetailsCD"/>
+        <relationship name="squad" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SquadCD"/>
+    </entity>
+    <entity name="WinnerCD" representedClassName=".WinnerCD" syncable="YES">
+        <attribute name="address" optional="YES" attributeType="String"/>
+        <attribute name="clubColors" optional="YES" attributeType="String"/>
+        <attribute name="crest" optional="YES" attributeType="String"/>
+        <attribute name="founded" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="shortName" optional="YES" attributeType="String"/>
+        <attribute name="tla" optional="YES" attributeType="String"/>
+        <attribute name="venue" optional="YES" attributeType="String"/>
+        <attribute name="website" optional="YES" attributeType="String"/>
+    </entity>
 </model>

@@ -27,15 +27,16 @@ class CompetitionTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
     
-    // MARK: - configure Function
     func configure(with competition: CompetationDetails) {
-            longNameLabel.text = competition.name
+        print("Configuring with competition: \(competition)")
+        longNameLabel.text = competition.name
         shortNameLabel.text = competition.area?.name
         numberOfTeams.text = "Teams: \(competition.currentSeason?.currentMatchday ?? 0)"
         if let currentGames = competition.currentSeason?.currentMatchday {
-                numberOfGames.text = "Games: \(currentGames)"
-            } else {
-                numberOfGames.text = "Games: N/A"
-            }
+            numberOfGames.text = "Games: \(currentGames)"
+        } else {
+            numberOfGames.text = "Games: N/A"
         }
+    }
+
 }

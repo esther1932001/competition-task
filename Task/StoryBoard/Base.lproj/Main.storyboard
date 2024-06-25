@@ -187,8 +187,8 @@
                         <outlet property="collectionView" destination="K6J-yR-ek0" id="T39-uw-ted"/>
                         <outlet property="idLabel" destination="nV3-Ly-lbw" id="Ln5-Oq-t92"/>
                         <outlet property="lastUpdateLabel" destination="zZ8-pg-DyG" id="GGE-jA-2oA"/>
-                        <outlet property="nameLable" destination="S9p-aW-UYH" id="Moh-Tb-CNA"/>
-                        <outlet property="numberOfSessionsLable" destination="GvU-C8-ivF" id="1FS-tD-OhO"/>
+                        <outlet property="nameLable" destination="S9p-aW-UYH" id="B52-pK-qW8"/>
+                        <outlet property="numberOfSessionsLable" destination="GvU-C8-ivF" id="C5A-KC-fl1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FHr-aN-FOb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
