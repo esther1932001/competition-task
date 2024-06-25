@@ -15,10 +15,10 @@ class CoreDataManager {
 
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Task")
-        let description = NSPersistentStoreDescription()
-        description.shouldMigrateStoreAutomatically = true
-        description.shouldInferMappingModelAutomatically = true
-        container.persistentStoreDescriptions = [description]
+//        let description = NSPersistentStoreDescription()
+//        description.shouldMigrateStoreAutomatically = true
+//        description.shouldInferMappingModelAutomatically = true
+//        container.persistentStoreDescriptions = [description]
         
         container.loadPersistentStores { storeDescription, error in
             if let error = error as NSError? {
@@ -36,12 +36,13 @@ class CoreDataManager {
     func saveCompetitions(competitions: [CompetationDetails]) {
         let context = self.context()
         
-        clearCompetitions()
+//        clearCompetitions()
         
         for competition in competitions {
             print("Saving competition: \(competition)")
             
-            let competitionCD = CompetationDetailsCD(context: context)
+//            let competitionCD = CompetationDetailsCD(context: context)
+            let competitionCD: CompetationDetailsCD! = NSEntityDescription.insertNewObject(forEntityName: "CompetationDetailsCD", into: context) as? CompetationDetailsCD
             competitionCD.id = Int32(competition.id ?? 0)
             competitionCD.name = competition.name
             competitionCD.code = competition.code

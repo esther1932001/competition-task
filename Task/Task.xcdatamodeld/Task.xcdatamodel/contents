@@ -5,6 +5,8 @@
         <attribute name="flag" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamCD" inverseName="area" inverseEntity="TeamCD"/>
+        <relationship name="competationArea" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CompetationDetailsCD" inverseName="area" inverseEntity="CompetationDetailsCD"/>
     </entity>
     <entity name="CoachCD" representedClassName=".CoachCD" syncable="YES">
         <attribute name="dateOfBirth" optional="YES" attributeType="String"/>
@@ -13,6 +15,7 @@
         <attribute name="lastName" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="nationality" optional="YES" attributeType="String"/>
+        <relationship name="coach" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamCD" inverseName="coach" inverseEntity="TeamCD"/>
     </entity>
     <entity name="CompetationDetailsCD" representedClassName=".CompetationDetailsCD" syncable="YES">
         <attribute name="code" optional="YES" attributeType="String"/>
@@ -21,8 +24,10 @@
         <attribute name="lastUpdated" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
-        <relationship name="area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AreaCD"/>
-        <relationship name="currentSeason" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SeasonCD"/>
+        <relationship name="area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AreaCD" inverseName="competationArea" inverseEntity="AreaCD"/>
+        <relationship name="competitions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PostsCD" inverseName="competitions" inverseEntity="PostsCD"/>
+        <relationship name="currentSeason" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SeasonCD" inverseName="competationSeason" inverseEntity="SeasonCD"/>
+        <relationship name="runningCompetitions" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamCD" inverseName="runningCompetitions" inverseEntity="TeamCD"/>
     </entity>
     <entity name="CompetitionCD" representedClassName=".CompetitionCD" syncable="YES">
         <attribute name="code" optional="YES" attributeType="String"/>
@@ -30,24 +35,28 @@
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="competition" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PostsCD" inverseName="competition" inverseEntity="PostsCD"/>
     </entity>
     <entity name="FiltersCD" representedClassName=".FiltersCD" syncable="YES">
         <attribute name="season" optional="YES" attributeType="String"/>
+        <relationship name="filter" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PostsCD" inverseName="filters" inverseEntity="PostsCD"/>
     </entity>
     <entity name="PostsCD" representedClassName=".PostsCD" syncable="YES">
         <attribute name="count" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="competition" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CompetitionCD"/>
-        <relationship name="competitions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CompetationDetailsCD"/>
-        <relationship name="filters" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FiltersCD"/>
-        <relationship name="season" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SeasonCD"/>
-        <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamCD"/>
+        <relationship name="competition" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CompetitionCD" inverseName="competition" inverseEntity="CompetitionCD"/>
+        <relationship name="competitions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CompetationDetailsCD" inverseName="competitions" inverseEntity="CompetationDetailsCD"/>
+        <relationship name="filters" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="FiltersCD" inverseName="filter" inverseEntity="FiltersCD"/>
+        <relationship name="season" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SeasonCD" inverseName="season" inverseEntity="SeasonCD"/>
+        <relationship name="teams" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TeamCD" inverseName="team" inverseEntity="TeamCD"/>
     </entity>
     <entity name="SeasonCD" representedClassName=".SeasonCD" syncable="YES">
         <attribute name="currentMatchday" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="endDate" optional="YES" attributeType="String"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="startDate" optional="YES" attributeType="String"/>
-        <relationship name="winner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WinnerCD"/>
+        <relationship name="competationSeason" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CompetationDetailsCD" inverseName="currentSeason" inverseEntity="CompetationDetailsCD"/>
+        <relationship name="season" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PostsCD" inverseName="season" inverseEntity="PostsCD"/>
+        <relationship name="winner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WinnerCD" inverseName="winner" inverseEntity="WinnerCD"/>
     </entity>
     <entity name="SquadCD" representedClassName=".SquadCD" syncable="YES">
         <attribute name="dateOfBirth" optional="YES" attributeType="String"/>
@@ -55,6 +64,7 @@
         <attribute name="name" optional="YES" attributeType="String"/>
         <attribute name="nationality" optional="YES" attributeType="String"/>
         <attribute name="position" optional="YES" attributeType="String"/>
+        <relationship name="squad" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TeamCD" inverseName="squad" inverseEntity="TeamCD"/>
     </entity>
     <entity name="TeamCD" representedClassName=".TeamCD" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String"/>
@@ -68,10 +78,11 @@
         <attribute name="tla" optional="YES" attributeType="String"/>
         <attribute name="venue" optional="YES" attributeType="String"/>
         <attribute name="website" optional="YES" attributeType="String"/>
-        <relationship name="area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AreaCD"/>
-        <relationship name="coach" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoachCD"/>
-        <relationship name="runningCompetitions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CompetationDetailsCD"/>
-        <relationship name="squad" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SquadCD"/>
+        <relationship name="area" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="AreaCD" inverseName="area" inverseEntity="AreaCD"/>
+        <relationship name="coach" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoachCD" inverseName="coach" inverseEntity="CoachCD"/>
+        <relationship name="runningCompetitions" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CompetationDetailsCD" inverseName="runningCompetitions" inverseEntity="CompetationDetailsCD"/>
+        <relationship name="squad" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SquadCD" inverseName="squad" inverseEntity="SquadCD"/>
+        <relationship name="team" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PostsCD" inverseName="teams" inverseEntity="PostsCD"/>
     </entity>
     <entity name="WinnerCD" representedClassName=".WinnerCD" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String"/>
@@ -85,5 +96,6 @@
         <attribute name="tla" optional="YES" attributeType="String"/>
         <attribute name="venue" optional="YES" attributeType="String"/>
         <attribute name="website" optional="YES" attributeType="String"/>
+        <relationship name="winner" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SeasonCD" inverseName="winner" inverseEntity="SeasonCD"/>
     </entity>
 </model>
