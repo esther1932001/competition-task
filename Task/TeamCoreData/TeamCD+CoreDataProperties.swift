@@ -35,24 +35,7 @@ extension  TeamCD {
     @NSManaged public var squad: Set<SquadCD>?
     @NSManaged public var area: AreaCD?
     
-    // Add other relationships as needed
-
-//    // Convenience initializer
-//    convenience init(id: Int32, name: String?, tla: String?, shortName: String?, address: String?, website: String?, founded: Int32, clubColors: String?, venue: String?, lastUpdated: Date?, crest: String?) {
-//        self.init(context: CoreDataManager.shared.context())
-//        self.id = id
-//        self.name = name
-//        self.tla = tla
-//        self.shortName = shortName
-//        self.address = address
-//        self.website = website
-//        self.founded = founded
-//        self.clubColors = clubColors
-//        self.venue = venue
-//        self.lastUpdated = lastUpdated
-//        self.crest = crest
-//    }
-
+    
     // addToSquad method
     @objc(addToSquadObject:)
     @NSManaged public func addToSquad(_ value: SquadCD)
