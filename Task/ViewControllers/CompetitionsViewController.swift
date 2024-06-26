@@ -19,7 +19,7 @@ class CompetitionsViewController: UIViewController {
     var competitions: [CompetationDetails] = []
     var activityIndicator: UIActivityIndicatorView!
     private var pathMonitor: NWPathMonitor!
-    private var isNetworkConnected = true
+    private var isNetworkConnected = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,17 +37,20 @@ class CompetitionsViewController: UIViewController {
     }
 
     // MARK: Start Monitoring Network
-    private func startMonitoringNetwork() {
-        pathMonitor = NWPathMonitor()
-        let queue = DispatchQueue(label: "NetworkMonitor")
-        pathMonitor.pathUpdateHandler = { [weak self] path in
-            print("Network status changed: \(path.status)")
-            DispatchQueue.main.async {
-                self?.loadAllCompetitions()
-            }
-        }
-        pathMonitor.start(queue: queue)
-    }
+       private func startMonitoringNetwork() {
+           pathMonitor = NWPathMonitor()
+           let queue = DispatchQueue(label: "NetworkMonitor")
+           pathMonitor.pathUpdateHandler = { [weak self] path in
+               print("Network status changed: \(path.status)")
+            //   self?.isNetworkConnected = path.status == .satisfied
+               
+               // Reload competitions data whenever network status changes
+               DispatchQueue.main.async {
+                   self?.loadAllCompetitions()
+               }
+           }
+           pathMonitor.start(queue: queue)
+       }
 
     // MARK: Stop Monitoring Network
     private func stopMonitoringNetwork() {

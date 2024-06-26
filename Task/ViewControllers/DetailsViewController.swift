@@ -63,7 +63,7 @@ class DetailsViewController: UIViewController {
         let queue = DispatchQueue(label: "NetworkMonitor")
         pathMonitor.pathUpdateHandler = { [weak self] path in
             print("Network status changed: \(path.status)")
-            self?.isNetworkConnected = path.status == .satisfied
+           // self?.isNetworkConnected = path.status == .satisfied
             
             DispatchQueue.main.async {
                 self?.loadDetailsData()
@@ -117,20 +117,21 @@ class DetailsViewController: UIViewController {
         }
     }
     
-        func loadTeamDetails() {
-            guard let teamId = teamId else {
-                print("Team ID is nil")
-                return
-            }
-            activityIndicator.startAnimating()
-
+    func loadTeamDetails() {
+        guard let teamId = teamId else {
+            print("Team ID is nil")
+            return
+        }
+        activityIndicator.startAnimating()
+        
+        if isNetworkConnected {
             let urlString = "competitions/\(teamId)/teams"
             print("Fetching URL: \(urlString)")
-
+            
             NetworkManager.shared.request(urlString, type: Posts.self) { [weak self] result in
                 DispatchQueue.main.async {
                     self?.activityIndicator.stopAnimating()
-
+                    
                     switch result {
                     case .success(let posts):
                         guard let team = posts.teams?.first else {
@@ -139,14 +140,34 @@ class DetailsViewController: UIViewController {
                         self?.teams = posts.teams ?? []
                         self?.team = team
                         self?.collectionView.reloadData()
-
+                        
+                        // Save to Core Data
+                        CoreDataManager.shared.clearTeams() // Optional: Clear existing data before saving new data
+                        CoreDataManager.shared.saveTeams(teams: posts.teams ?? [])
+                        
+                        // Print saved teams
+                        CoreDataManager.shared.printSavedTeams()
+                        
                     case .failure(let error):
                         print("Error fetching team details: \(error.localizedDescription)")
                         self?.showErrorAlert(message: "Error fetching team details: \(error.localizedDescription)")
                     }
                 }
             }
+        } else {
+            activityIndicator.stopAnimating()
+            if let savedTeams = CoreDataManager.shared.fetchSavedTeams() {
+                print("Fetched saved teams: \(savedTeams)")
+                CoreDataManager.shared.printSavedTeams()
+                self.teams = savedTeams.map { Team(id: Int($0.id), name: $0.name , shortName: $0.shortName , tla: $0.tla, crest: $0.crest , address: $0.address,website: $0.website) } // Example conversion
+                self.collectionView.reloadData() // Example UI update
+            } else {
+                print("No saved teams found")
+                self.showErrorAlert(message: "No saved teams found")
+            }
         }
+    }
+
 }
 
 // MARK: - UICollectionViewDataSource, UICollectionViewDelegateFlowLayout

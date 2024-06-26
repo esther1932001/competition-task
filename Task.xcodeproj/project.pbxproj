@@ -24,6 +24,7 @@
 		5E2445252C163E44002DAB58 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2445232C163E44002DAB58 /* DetailsViewController.swift */; };
 		5E2445292C1641E5002DAB58 /* DetailsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2445272C1641E5002DAB58 /* DetailsCollectionViewCell.swift */; };
 		5E24452A2C1641E5002DAB58 /* DetailsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E2445282C1641E5002DAB58 /* DetailsCollectionViewCell.xib */; };
+		5E2A2E022C2C58EB0076633F /* SquadCD+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E2A2E012C2C58EB0076633F /* SquadCD+CoreDataProperties.swift */; };
 		5EC910C22C2897DB004C272C /* Task.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 5EC910C02C2897DB004C272C /* Task.xcdatamodeld */; };
 		5EC910C42C28A594004C272C /* PostsCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC910C32C28A594004C272C /* PostsCoreDataManager.swift */; };
 		5EC910C62C28A696004C272C /* PostsCD+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EC910C52C28A696004C272C /* PostsCD+CoreDataClass.swift */; };
@@ -70,6 +71,7 @@
 		5E2445232C163E44002DAB58 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		5E2445272C1641E5002DAB58 /* DetailsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsCollectionViewCell.swift; sourceTree = "<group>"; };
 		5E2445282C1641E5002DAB58 /* DetailsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DetailsCollectionViewCell.xib; sourceTree = "<group>"; };
+		5E2A2E012C2C58EB0076633F /* SquadCD+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SquadCD+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		5EC910C12C2897DB004C272C /* Task.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Task.xcdatamodel; sourceTree = "<group>"; };
 		5EC910C32C28A594004C272C /* PostsCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostsCoreDataManager.swift; sourceTree = "<group>"; };
 		5EC910C52C28A696004C272C /* PostsCD+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostsCD+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				5EC910C02C2897DB004C272C /* Task.xcdatamodeld */,
 				5EC910DD2C28B0EB004C272C /* PostsCoreData */,
 				5EC910E02C28B207004C272C /* FiltersCoreData */,
+				5E2A2E032C2C59070076633F /* SquadCoreData */,
 				5EC910E12C28B232004C272C /* TeamCoreData */,
 				5EC910E22C28B251004C272C /* CompetitionCoreData */,
 				5EC910E32C28B272004C272C /* SeasonCoreData */,
@@ -151,6 +154,14 @@
 				5EC910F42C28B4EA004C272C /* CoachCoreData */,
 			);
 			path = Task;
+			sourceTree = "<group>";
+		};
+		5E2A2E032C2C59070076633F /* SquadCoreData */ = {
+			isa = PBXGroup;
+			children = (
+				5E2A2E012C2C58EB0076633F /* SquadCD+CoreDataProperties.swift */,
+			);
+			path = SquadCoreData;
 			sourceTree = "<group>";
 		};
 		5E5692C32C18B5CE0065DEA1 /* NetworkManager */ = {
@@ -466,6 +477,7 @@
 				5EC910C62C28A696004C272C /* PostsCD+CoreDataClass.swift in Sources */,
 				0A5DFADE2C1712A300C6FD20 /* TeamDetailViewController.swift in Sources */,
 				5EC910DA2C28B06C004C272C /* CompetationDetailsCD+CoreDataClass.swift in Sources */,
+				5E2A2E022C2C58EB0076633F /* SquadCD+CoreDataProperties.swift in Sources */,
 				5E2444FD2C161128002DAB58 /* AppDelegate.swift in Sources */,
 				0A5DFADC2C1703C700C6FD20 /* CompetetionDetails.swift in Sources */,
 				5EC910DC2C28B0BB004C272C /* TeamCD+CoreDataClass.swift in Sources */,
