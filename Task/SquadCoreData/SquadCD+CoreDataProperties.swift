@@ -25,13 +25,13 @@ public class SquadCD: NSManagedObject {
     // Relationship to TeamCD
     @NSManaged public var team: TeamCD?
 
-    // Convenience initializer
-    convenience init(id: Int32, name: String?, position: String?, dateOfBirth: String?, nationality: String?) {
-        self.init(context: CoreDataManager.shared.context())
-        self.id = id
-        self.name = name
-        self.position = position
-        self.dateOfBirth = dateOfBirth
-        self.nationality = nationality
-    }
+//    // Convenience initializer
+//    convenience init(id: Int32, name: String?, position: String?, dateOfBirth: String?, nationality: String?) {
+//        self.init(context: CoreDataManager.shared.context())
+//        self.id = id
+//        self.name = name
+//        self.position = position
+//        self.dateOfBirth = dateOfBirth
+//        self.nationality = nationality
+//    }
 }

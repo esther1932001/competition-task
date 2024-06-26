@@ -23,23 +23,19 @@ extension CoreDataManager {
                 teamCD.website = team.website
                 teamCD.tla = team.tla
                 
-//                // Save squad members
-//                if let squad = team.squad {
-//                    for squadMember in squad {
-//                        if let squadCD = NSEntityDescription.insertNewObject(forEntityName: "SquadCD", into: context) as? SquadCD {
-//                            squadCD.id = Int32(squadMember.id ?? 0)
-//                            squadCD.name = squadMember.name
-//                            squadCD.position = squadMember.position
-//                            squadCD.dateOfBirth = squadMember.dateOfBirth
-//                            squadCD.nationality = squadMember.nationality
-//                            // Set the relationship back to the team
-//                            squadCD.team = teamCD
-//                            // This assumes you have a one-to-many relationship from TeamCD to SquadCD
-//                            // and that the relationship is named `squad`
-//                            teamCD.addToSquad(squadCD)
-//                        }
-//                    }
-//                }
+                // Save squad members
+                if let squad = team.squad {
+                    for squadMember in squad {
+                        if let squadCD = NSEntityDescription.insertNewObject(forEntityName: "SquadCD", into: context) as? SquadCD {
+                            squadCD.id = Int32(squadMember.id ?? 0)
+                            squadCD.name = squadMember.name
+                            squadCD.position = squadMember.position
+                            squadCD.dateOfBirth = squadMember.dateOfBirth
+                            squadCD.nationality = squadMember.nationality
+                            teamCD.squad?.insert(squadCD)
+                        }
+                    }
+                }
             } else {
                 print("Failed to create a new TeamCD object")
             }
