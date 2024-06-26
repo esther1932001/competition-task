@@ -26,7 +26,7 @@ class DetailsViewController: UIViewController {
     var activityIndicator: UIActivityIndicatorView!
     var teams = [Team]()
     private var pathMonitor: NWPathMonitor!
-    private var isNetworkConnected = false
+    private var isNetworkConnected = true
     
     // MARK: View Lifecycle
     override func viewDidLoad() {
@@ -63,7 +63,7 @@ class DetailsViewController: UIViewController {
         let queue = DispatchQueue(label: "NetworkMonitor")
         pathMonitor.pathUpdateHandler = { [weak self] path in
             print("Network status changed: \(path.status)")
-           // self?.isNetworkConnected = path.status == .satisfied
+            self?.isNetworkConnected = path.status == .satisfied
             
             DispatchQueue.main.async {
                 self?.loadDetailsData()

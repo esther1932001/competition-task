@@ -22,24 +22,24 @@ extension CoreDataManager {
                 teamCD.address = team.address
                 teamCD.website = team.website
                 teamCD.tla = team.tla
-                //                // Save squad members
-                //                if let squad = team.squad {
-                //                    for squadMember in squad {
-                //                        if let squadCD = NSEntityDescription.insertNewObject(forEntityName: "SquadCD", into: context) as? SquadCD {
-                //                            squadCD.id = Int32(squadMember.id ?? 0)
-                //                            squadCD.name = squadMember.name
-                //                            squadCD.position = squadMember.position
-                //                            squadCD.dateOfBirth = squadMember.dateOfBirth
-                //                            squadCD.nationality = squadMember.nationality
-                //                            // Set the relationship back to the team
-                //                            squadCD.team = teamCD
-                //                            // Add squadCD to teamCD's squad relationship
-                //                            teamCD.addToSquad(squadCD)
-                //                        }
-                //                    }
-                //                }
-                //
-                // Save other attributes as necessary
+                
+//                // Save squad members
+//                if let squad = team.squad {
+//                    for squadMember in squad {
+//                        if let squadCD = NSEntityDescription.insertNewObject(forEntityName: "SquadCD", into: context) as? SquadCD {
+//                            squadCD.id = Int32(squadMember.id ?? 0)
+//                            squadCD.name = squadMember.name
+//                            squadCD.position = squadMember.position
+//                            squadCD.dateOfBirth = squadMember.dateOfBirth
+//                            squadCD.nationality = squadMember.nationality
+//                            // Set the relationship back to the team
+//                            squadCD.team = teamCD
+//                            // This assumes you have a one-to-many relationship from TeamCD to SquadCD
+//                            // and that the relationship is named `squad`
+//                            teamCD.addToSquad(squadCD)
+//                        }
+//                    }
+//                }
             } else {
                 print("Failed to create a new TeamCD object")
             }
@@ -52,6 +52,7 @@ extension CoreDataManager {
             print("Failed to save teams to Core Data: \(error.localizedDescription)")
         }
     }
+
     func clearTeams() {
         let context = self.context()
         let fetchRequest: NSFetchRequest<NSFetchRequestResult> = TeamCD.fetchRequest()
